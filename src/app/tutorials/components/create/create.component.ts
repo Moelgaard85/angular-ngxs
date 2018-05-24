@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { AddTutorial } from '../actions/tutorial.actions';
+import { TutorialsService } from '../../shared/tutorials.service';
 
 @Component({
   selector: 'app-create',
@@ -9,13 +8,12 @@ import { AddTutorial } from '../actions/tutorial.actions';
 })
 export class CreateComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private tutorialService: TutorialsService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   addTutorial(name, url) {
-    this.store.dispatch(new AddTutorial({ name: name, url: url }));
+    this.tutorialService.addTutorial(name, url);
   }
 
 }

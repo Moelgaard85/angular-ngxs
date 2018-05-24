@@ -1,9 +1,8 @@
-<div class="right"
-  *ngIf="tutorials$">
+<div class="right">
 
   <h3>Tutorials</h3>
   <ul>
-    <li (click)="delTutorial(tutorial.name)"
+    <li (click)="deleteTutorial(tutorial.name)"
       *ngFor="let tutorial of tutorials">
       <p>{{ tutorial.name }} ({{tutorial.url}})</p>
 

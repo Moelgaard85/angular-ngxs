@@ -1,13 +1,13 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { Tutorial } from '../models/tutorial.model';
-import { AddTutorial, RemoveTutorial } from '../actions/tutorial.actions';
+import { Tutorial } from '../shared/tutorial.model';
+import { AddTutorial, RemoveTutorial } from './tutorial.actions';
 
 export class TutorialStateModel {
   tutorials: Tutorial[];
 }
 
 @State<TutorialStateModel>({
-  name: 'tutorials',
+  name: 'TutorialState',
   defaults: {
     tutorials: []
   }
@@ -32,7 +32,5 @@ export class TutorialState {
       tutorials: getState().tutorials.filter(a => a.name !== payload)
     });
   }
-
-
 
 }

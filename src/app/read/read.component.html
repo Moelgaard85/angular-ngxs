@@ -1,3 +1,13 @@
-<p>
-  read works!
-</p>
+<div class="right"
+  *ngIf="tutorials$">
+
+  <h3>Tutorials</h3>
+  <ul>
+    <li (click)="delTutorial(tutorial.name)"
+      *ngFor="let tutorial of tutorials">
+      <p>{{ tutorial.name }} ({{tutorial.url}})</p>
+
+    </li>
+  </ul>
+
+</div>

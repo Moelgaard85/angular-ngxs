@@ -1,32 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TutorialsService } from '../../shared/tutorials.service';
 import { Subject, Observable } from 'rxjs';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Tutorial } from '../../shared/tutorial.model';
 import { takeUntil } from 'rxjs/operators';
 import { TutorialState } from '../../state/tutorial.state';
+import { AppState } from '../../../state/app.state';
 
 @Component({
   selector: 'app-tutorials',
   templateUrl: './tutorials.component.html',
   styleUrls: ['./tutorials.component.css']
 })
-export class TutorialsComponent implements OnInit {
+export class TutorialsComponent implements OnInit, OnDestroy {
 
-  @Select(TutorialState.getTutorials) tutorials$: Observable<Tutorial[]>;
+  // @Select(TutorialState.getTutorials) tutorials$: Observable<Tutorial[]>;
+  tutorials$: Observable<Tutorial[]> = this.store.select(state => state.AppState.TutorialState.tutorials);
+
   private ngUnsubscribe: Subject<Boolean> = new Subject();
   tutorials: Tutorial[];
 
-  constructor() {
+  constructor(private store: Store) {
+
     this.tutorials$.pipe(
       takeUntil(this.ngUnsubscribe)
-    ).subscribe((response: Tutorial[]) => {
+    ).subscribe(response => {
       console.log('TutorialsComponent: tutorials response: ', response);
       this.tutorials = response;
     });
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

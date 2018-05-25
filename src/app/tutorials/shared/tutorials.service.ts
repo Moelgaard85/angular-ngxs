@@ -10,10 +10,10 @@ export class TutorialsService {
   constructor(private store: Store) { }
 
   addTutorial(name, url) {
-    return this.store.dispatch(new AddTutorial({ name: name, url: url }));
+    this.store.dispatch(new AddTutorial({ name: name, url: url }));
   }
 
   deleteTutorial(name) {
-    return this.store.dispatch(new RemoveTutorial(name));
+    this.store.dispatch(new RemoveTutorial(name));
   }
 }

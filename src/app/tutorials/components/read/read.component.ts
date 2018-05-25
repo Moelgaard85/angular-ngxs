@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Tutorial } from '../../shared/tutorial.model';
 import { TutorialsService } from '../../shared/tutorials.service';
@@ -8,7 +8,7 @@ import { TutorialsService } from '../../shared/tutorials.service';
   templateUrl: './read.component.html',
   styleUrls: ['./read.component.css']
 })
-export class ReadComponent implements OnInit {
+export class ReadComponent implements OnInit, OnChanges {
 
   @Input() tutorials: Tutorial[];
 
@@ -16,6 +16,14 @@ export class ReadComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ReadComponent: ngOnChanges: changes: ', changes);
+    // this.doSomething(changes.tutorials.currentValue);
+    // You can also use tutorials.previousValue and
+    // tutorials.firstChange for comparing old and new values
+
+  }
 
   deleteTutorial(name) {
     this.tutorialService.deleteTutorial(name);

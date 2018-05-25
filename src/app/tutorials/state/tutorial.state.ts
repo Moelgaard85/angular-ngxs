@@ -13,10 +13,10 @@ export class TutorialStateModel {
   }
 })
 export class TutorialState {
-  @Selector()
-  static getTutorials(state: TutorialStateModel) {
-    return state.tutorials;
-  }
+  // @Selector()
+  // static getTutorials(state: TutorialStateModel) {
+  //   return state.tutorials;
+  // }
 
   @Action(AddTutorial)
   add({ getState, patchState }: StateContext<TutorialStateModel>, { payload }: AddTutorial) {

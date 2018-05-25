@@ -12,10 +12,9 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 @NgModule({
   imports: [
     CommonModule,
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
     TutorialsRoutingModule
   ],
   declarations: [TutorialsComponent, ReadComponent, CreateComponent]
 })
 export class TutorialsModule { }
+

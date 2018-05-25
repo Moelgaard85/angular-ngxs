@@ -8,11 +8,13 @@ import { NgxsModule } from '@ngxs/store';
 import { TutorialState } from './state/tutorial.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { AdminModule } from '../admin/admin.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    TutorialsRoutingModule
+    TutorialsRoutingModule,
+    AdminModule
   ],
   declarations: [TutorialsComponent, ReadComponent, CreateComponent]
 })

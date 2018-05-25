@@ -5,7 +5,7 @@ import { TutorialsComponent } from './pages/tutorials/tutorials.component';
 const routes: Routes = [
   {
     path: '',
-    component: TutorialsComponent
+    component: TutorialsComponent,
   }
 ];
 

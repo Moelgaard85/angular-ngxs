@@ -16,6 +16,6 @@ export class AppComponent implements OnInit {
     this.actions.pipe(ofActionDispatched(Logout)).subscribe(() => {
       // this.router.navigate(['/login']);
       console.log('AppComponent: Log out action caught!');
-    })
+    });
   }
 }

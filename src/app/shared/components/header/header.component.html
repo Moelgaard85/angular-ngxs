@@ -1,10 +1,28 @@
-<button [routerLink]="[ '/admin' ]"
-  routerLinkActive="active"
-  class="btn btn-block">Admin</button>
+<div>
+  <button [routerLink]="[ '/admin' ]"
+    routerLinkActive="active"
+    class="btn btn-block">Admin</button>
 
-<button [routerLink]="[ '/tutorials' ]"
-  routerLinkActive="active"
-  class="btn btn-block">Tutorials</button>
+  <button [routerLink]="[ '/tutorials' ]"
+    routerLinkActive="active"
+    class="btn btn-block">Tutorials</button>
+</div>
 
-<button (click)="login()">Login</button>
-<button (click)="logout()">Logout</button>
+<div *ngIf="!loggedIn">
+  <input type="text"
+    name="username"
+    placeholder="username"
+    #username>
+  <input type="password"
+    name="password"
+    placeholder="password"
+    #password>
+
+  <button *ngIf="!loggedIn"
+    (click)="login(username.value, password.value)">Login</button>
+</div>
+
+<div *ngIf="loggedIn">
+  <button *ngIf="loggedIn"
+    (click)="logout()">Logout</button>
+</div>

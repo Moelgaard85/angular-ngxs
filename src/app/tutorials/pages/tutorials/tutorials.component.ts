@@ -28,6 +28,8 @@ export class TutorialsComponent implements OnInit, OnDestroy {
       console.log('TutorialsComponent: tutorials response: ', response);
       this.tutorials = response;
     });
+
+    // PouchDB.
   }
 
   ngOnInit() { }

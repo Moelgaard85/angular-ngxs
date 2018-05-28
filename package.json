@@ -22,7 +22,9 @@
     "@angular/router": "^6.0.2",
     "@ngxs/storage-plugin": "^3.0.1",
     "@ngxs/store": "^3.0.1",
+    "@types/pouchdb": "^6.3.2",
     "core-js": "^2.5.4",
+    "pouchdb": "^6.4.3",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

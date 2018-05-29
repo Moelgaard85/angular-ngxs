@@ -2,7 +2,7 @@
 
   <h3>Tutorials</h3>
   <ul>
-    <li (click)="deleteTutorial(tutorial.name)"
+    <li (click)="removeTutorial(tutorial._id)"
       *ngFor="let tutorial of tutorials">
       <p>{{ tutorial.name }} ({{tutorial.url}})</p>
 

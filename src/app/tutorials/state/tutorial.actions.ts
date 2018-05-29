@@ -11,3 +11,9 @@ export class RemoveTutorial {
 
   constructor(public payload: string) { }
 }
+
+export class InitTutorialState {
+  static readonly type = '[TUTORIAL] Init';
+
+  constructor() { }
+}

@@ -25,8 +25,8 @@ export class ReadComponent implements OnInit, OnChanges {
 
   }
 
-  deleteTutorial(name) {
-    this.tutorialService.deleteTutorial(name);
+  removeTutorial(_id: string) {
+    this.tutorialService.removeTutorial(_id);
   }
 
 }

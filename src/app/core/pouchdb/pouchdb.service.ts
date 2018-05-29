@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
+import { from } from 'rxjs';
 // const PouchDB = require('pouchdb');
 
 @Injectable({
@@ -19,43 +20,48 @@ export class PouchdbService {
     this.db.info().then(info => {
       console.log(info);
     });
-
-    this.addData();
-
   }
 
   getRandomInt() {
     return Math.floor(Math.random() * 10000000) + 99999999;
   }
 
-  addData() {
-    this.lastAddedId = this.getRandomInt().toString();
-    const newDoc = {
-      '_id': this.lastAddedId,
-      'name': 'Mittens',
-      'occupation': 'kitten',
-      'age': 3,
-      'hobbies': [
-        'My random number is ' + this.lastAddedId,
-        'chasing laser pointers',
-        'lookin\' hella cute'
-      ]
-    };
-    // Create data
-    this.db.put(newDoc).then(putDoc => {
-      console.log('Create data: putDoc: ', putDoc);
-      // Fetch data
-      return this.db.get(this.lastAddedId);
-    }).then((getDoc) => {
-      console.log('Fetch created data: getDoc: ', getDoc);
-      // Update data
-      getDoc.age = 4;
-      return this.db.put(getDoc);
-    }).then(updatedDoc => {
-      console.log('Update created data ', updatedDoc);
-    }).catch(err => {
-      console.error('DB error: ', err);
-    });
-
+  addData(data) {
+    return from<any>(
+      // create data
+      this.db.put(data).then(putDoc => {
+        console.log('Create data: putDoc: ', putDoc);
+        // Fetch data
+        return this.db.get(data._id);
+      }).catch(err => {
+        console.error('PouchdbService: addData error: ', err);
+      })
+    );
   }
+
+  updateData(data) {
+    // Update data
+    return from(this.db.put(data));
+  }
+
+  removeData(_id: string) {
+    return from(
+      this.db.get(_id).then(function (doc) {
+        return this.db.remove(doc);
+      }).catch(err => {
+        console.error('PouchdbService: updateData error: ', err);
+      })
+    );
+  }
+
+  getAllData() {
+    console.error('PouchdbService: getAllData called');
+    return from(
+      this.db.allDocs({ include_docs: true })
+        .catch(err => {
+          console.error('PouchdbService: getAllData error: ', err);
+        })
+    );
+  }
+
 }

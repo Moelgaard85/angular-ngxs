@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Actions, ofActionDispatched } from '@ngxs/store';
+import { Actions, ofActionDispatched, Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { Logout } from './state/app.actions';
 import { PouchdbService } from './core/pouchdb/pouchdb.service';
+import { InitTutorialState } from './tutorials/state/tutorial.actions';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,11 @@ import { PouchdbService } from './core/pouchdb/pouchdb.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private actions: Actions,
+  constructor(
+    private actions: Actions,
     private router: Router,
-    private pouchDBService: PouchdbService) { }
+    private pouchDBService: PouchdbService) {
+  }
 
   ngOnInit() {
     this.actions.pipe(ofActionDispatched(Logout)).subscribe(() => {
@@ -21,4 +24,5 @@ export class AppComponent implements OnInit {
       console.log('AppComponent: Log out action caught!');
     });
   }
+
 }

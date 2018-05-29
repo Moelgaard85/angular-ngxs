@@ -6,6 +6,7 @@ import { Tutorial } from '../../shared/tutorial.model';
 import { takeUntil } from 'rxjs/operators';
 import { TutorialState } from '../../state/tutorial.state';
 import { AppState } from '../../../state/app.state';
+import { InitTutorialState } from '../../state/tutorial.actions';
 
 @Component({
   selector: 'app-tutorials',
@@ -21,15 +22,8 @@ export class TutorialsComponent implements OnInit, OnDestroy {
   tutorials: Tutorial[];
 
   constructor(private store: Store) {
-
-    this.tutorials$.pipe(
-      takeUntil(this.ngUnsubscribe)
-    ).subscribe(response => {
-      console.log('TutorialsComponent: tutorials response: ', response);
-      this.tutorials = response;
-    });
-
-    // PouchDB.
+    this.initTutorials();
+    this.listenForTutorials();
   }
 
   ngOnInit() { }
@@ -37,6 +31,20 @@ export class TutorialsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  initTutorials() {
+    console.log('TutorialsComponent: initTutorials called');
+    this.store.dispatch(new InitTutorialState());
+  }
+
+  listenForTutorials() {
+    this.tutorials$.pipe(
+      takeUntil(this.ngUnsubscribe)
+    ).subscribe(response => {
+      console.log('TutorialsComponent: tutorials response: ', response);
+      this.tutorials = response;
+    });
   }
 
 }

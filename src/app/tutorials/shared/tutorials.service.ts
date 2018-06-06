@@ -16,4 +16,5 @@ export class TutorialsService {
   deleteTutorial(name) {
     this.store.dispatch(new RemoveTutorial(name));
   }
+
 }

@@ -24,7 +24,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
       TutorialState
     ]),
     NgxsStoragePluginModule.forRoot({
-      key: 'AppState.token'
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
